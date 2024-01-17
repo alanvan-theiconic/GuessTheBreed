@@ -5,6 +5,7 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import com.alanvan.gues_the_breed.di.appModule
 import com.alanvan.gues_the_breed.di.networkModule
+import com.alanvan.gues_the_breed.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -15,7 +16,7 @@ class GuessTheBreedApp : Application(), ImageLoaderFactory {
         startKoin {
             androidLogger()
             androidContext(this@GuessTheBreedApp)
-            modules(appModule, networkModule)
+            modules(appModule, viewModelModule, networkModule)
         }
     }
 

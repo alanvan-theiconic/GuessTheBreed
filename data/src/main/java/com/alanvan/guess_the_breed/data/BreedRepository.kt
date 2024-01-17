@@ -6,4 +6,5 @@ import io.reactivex.rxjava3.core.Single
 interface BreedRepository {
     fun getRandomBreedImage(): Single<BreedImage>
     fun getBreedImages(breedName: String?): Single<List<String>>
+    fun getAllBreeds(): Single<List<String>>
 }

@@ -14,7 +14,8 @@ retrofit = "2.9.0"
 gson = "2.10.1"
 rxjava = "3.1.8"
 rxjava-android = "3.0.2"
-lifecycle_version = "2.2.0"
+lifecycle_version = "2.7.0"
+nav_version = "2.7.6"
 jetbrainsKotlinJvm = "1.9.0"
 
 [libraries]
@@ -42,8 +43,8 @@ retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref 
 retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
 rxjava-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava-android" }
-viewmodelArch = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle_version" }
-liveDataArch = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle_version" }
+viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle_version" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "nav_version" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

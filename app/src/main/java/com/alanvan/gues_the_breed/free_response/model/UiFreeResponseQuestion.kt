@@ -1,9 +1,9 @@
-package com.alanvan.gues_the_breed.model
+package com.alanvan.gues_the_breed.free_response.model
 
 import androidx.compose.runtime.Immutable
 
 @Immutable
-data class UiBreedQuestion(
+data class UiFreeResponseQuestion(
     val breedAnswer: String,
     val breedImages: List<String>
 )

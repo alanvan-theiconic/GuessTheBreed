@@ -1,10 +1,14 @@
 package com.alanvan.gues_the_breed.di
 
 import com.alanvan.gues_the_breed.MainViewModel
+import com.alanvan.gues_the_breed.free_response.FreeResponseQuestionViewModel
+import com.alanvan.gues_the_breed.multiple_choice.MultipleChoiceQuestionViewModel
 import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.data.BreedRepositoryImpl
 import com.alanvan.guess_the_breed.data.BreedService
-import com.alanvan.guess_the_breed.domain.GetBreedQuestionUseCase
+import com.alanvan.guess_the_breed.domain.usecases.GetAllBreedsUseCase
+import com.alanvan.guess_the_breed.domain.usecases.GetFreeResponseQuestionUseCase
+import com.alanvan.guess_the_breed.domain.usecases.GetMultipleChoiceQuestionUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -17,13 +21,33 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val IO = "io"
 const val MAIN_THREAD = "mainThread"
-const val BASE_URL = "https://dog.ceo/"
+const val BASE_URL = "https://dog.ceo/api/"
 
 val appModule = module {
     single<Scheduler>(named(MAIN_THREAD)) { AndroidSchedulers.mainThread() }
     single<Scheduler>(named(IO)) { Schedulers.io() }
     single<BreedRepository> { BreedRepositoryImpl(get(), get(named(IO))) }
-    viewModel { MainViewModel(GetBreedQuestionUseCase(get()), get(named(MAIN_THREAD))) }
+}
+
+val viewModelModule = module {
+    viewModel {
+        MainViewModel(
+            GetAllBreedsUseCase(get()),
+            get(named(MAIN_THREAD))
+        )
+    }
+    viewModel {
+        FreeResponseQuestionViewModel(
+            GetFreeResponseQuestionUseCase(get()),
+            get(named(MAIN_THREAD))
+        )
+    }
+    viewModel {
+        MultipleChoiceQuestionViewModel(
+            GetMultipleChoiceQuestionUseCase(get()),
+            get(named(MAIN_THREAD))
+        )
+    }
 }
 
 val networkModule = module {

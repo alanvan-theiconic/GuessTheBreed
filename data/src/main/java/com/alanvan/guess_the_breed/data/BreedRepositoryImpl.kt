@@ -26,6 +26,17 @@ class BreedRepositoryImpl(
         } ?: Single.error(Exception("Breed name cannot be empty"))
     }
 
+    override fun getAllBreeds(): Single<List<String>> {
+        return service.getAllBreeds().subscribeOn(ioScheduler).map { response ->
+            response.message.entries.fold(mutableListOf()) { acc, entry ->
+                entry.value.forEach {
+                    acc.add("${entry.key}-${it}")
+                }
+                acc
+            }
+        }
+    }
+
     private fun String.extractBreedNameFromUrl(): String? {
         val pattern = Regex("/breeds/([^/]+)/")
         val matchResult = pattern.find(this)

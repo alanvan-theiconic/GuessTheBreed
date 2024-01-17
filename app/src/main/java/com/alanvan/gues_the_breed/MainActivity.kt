@@ -20,7 +20,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loadBreedQuestion()
         enableEdgeToEdge()
         setContent {
             GuessTheBreedTheme {
@@ -32,6 +31,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        viewModel.loadAllBreeds()
     }
 }
 

@@ -71,6 +71,8 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.rxjava)
     implementation(libs.rxjava.android)
+    implementation(libs.navigation.compose)
+    implementation(libs.viewModelCompose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

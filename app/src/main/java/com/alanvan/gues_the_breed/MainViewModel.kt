@@ -3,28 +3,25 @@ package com.alanvan.gues_the_breed
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alanvan.gues_the_breed.model.UiBreedQuestion
 import com.alanvan.guess_the_breed.domain.common.SingleUseCase
-import com.alanvan.guess_the_breed.domain.model.BreedQuestion
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 
 class MainViewModel(
-    private val getBreedQuestionUseCase: SingleUseCase<Unit, BreedQuestion>,
+    private val getAllBreedsUseCase: SingleUseCase<Unit, List<String>>,
     private val mainScheduler: Scheduler
 ) : ViewModel() {
+    private val _allBreeds: MutableLiveData<List<String>> = MutableLiveData()
+    val allBreeds: LiveData<List<String>> get() = _allBreeds
 
-    private val _breedQuestion: MutableLiveData<UiBreedQuestion> = MutableLiveData()
-    val breedQuestion: LiveData<UiBreedQuestion> get() = _breedQuestion
+    private var loadAllBreedsDisposable: Disposable? = null
 
-    private var breedQuestionDisposable: Disposable? = null
-
-    fun loadBreedQuestion() {
-        breedQuestionDisposable?.dispose()
-        breedQuestionDisposable = getBreedQuestionUseCase.execute(Unit)
+    fun loadAllBreeds() {
+        loadAllBreedsDisposable?.dispose()
+        loadAllBreedsDisposable = getAllBreedsUseCase.execute(Unit)
             .observeOn(mainScheduler)
             .subscribe({
-                       println("dmdmdmd ---- ${it.breedAnswer}")
+                println("dmdmdm --- ${it.size}")
             }, {
 
             })
@@ -32,5 +29,6 @@ class MainViewModel(
 
     override fun onCleared() {
         super.onCleared()
+        loadAllBreedsDisposable?.dispose()
     }
 }
