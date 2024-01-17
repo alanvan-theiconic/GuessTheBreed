@@ -12,7 +12,9 @@ koin = "3.5.3"
 coil = "2.5.0"
 retrofit = "2.9.0"
 gson = "2.10.1"
-rxjava = "2.2.19"
+rxjava = "3.1.8"
+rxjava-android = "3.0.2"
+lifecycle_version = "2.2.0"
 jetbrainsKotlinJvm = "1.9.0"
 
 [libraries]
@@ -37,9 +39,11 @@ coil-core = { module = "io.coil-kt:coil", version.ref = "coil" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
-retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava2", version.ref = "retrofit" }
-rxjava = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+retrofit-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
+rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+rxjava-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxjava-android" }
+viewmodelArch = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle_version" }
+liveDataArch = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycle_version" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

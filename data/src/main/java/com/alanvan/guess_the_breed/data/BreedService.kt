@@ -2,7 +2,7 @@ package com.alanvan.guess_the_breed.data
 
 import com.alanvan.guess_the_breed.data.model.BreedImageResponse
 import com.alanvan.guess_the_breed.data.model.BreedImagesResponse
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
 
