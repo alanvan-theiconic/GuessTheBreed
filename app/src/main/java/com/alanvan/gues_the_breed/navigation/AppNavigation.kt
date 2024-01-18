@@ -6,9 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.alanvan.gues_the_breed.common.slideIn
 import com.alanvan.gues_the_breed.common.slideOut
-import com.alanvan.gues_the_breed.free_response.FreeResponseQuestionScreen
 import com.alanvan.gues_the_breed.home.HomeScreen
-import com.alanvan.gues_the_breed.multiple_choice.MultipleChoiceQuestionScreen
+import com.alanvan.gues_the_breed.multiple_choice.GuessTheBreedScreen
 
 @Composable
 fun AppNavigation() {
@@ -22,22 +21,13 @@ fun AppNavigation() {
             HomeScreen(navController = navController)
         }
         composable(
-            route = MULTIPLE_CHOICE,
+            route = GUESS_THE_BREED,
             enterTransition = slideIn(),
             exitTransition = slideOut(),
             popEnterTransition = slideIn(),
             popExitTransition = slideOut()
         ) {
-            MultipleChoiceQuestionScreen(navController = navController)
-        }
-        composable(
-            route = FREE_RESPONSE,
-            enterTransition = slideIn(),
-            exitTransition = slideOut(),
-            popEnterTransition = slideIn(),
-            popExitTransition = slideOut()
-        ) {
-            FreeResponseQuestionScreen(navController = navController)
+            GuessTheBreedScreen(navController = navController)
         }
     }
 }

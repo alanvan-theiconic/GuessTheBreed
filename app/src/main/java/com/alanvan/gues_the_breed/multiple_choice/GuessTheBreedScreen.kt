@@ -41,13 +41,13 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MultipleChoiceQuestionScreen(
+fun GuessTheBreedScreen(
     navController: NavController
 ) {
-    val multipleChoiceQuestionViewModel = koinViewModel<MultipleChoiceQuestionViewModel>()
-    val multipleChoiceScreenState by multipleChoiceQuestionViewModel.multipleChoiceScreenState.observeAsState()
+    val viewModel = koinViewModel<GuessTheBreedViewModel>()
+    val screenState by viewModel.screenState.observeAsState()
     val snackBarHostState = remember { SnackbarHostState() }
-    val snackBarMessage = stringResource(id = R.string.multiple_choice_question_reselected)
+    val snackBarMessage = stringResource(id = R.string.question_already_answered)
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(topBar = {
@@ -73,9 +73,9 @@ fun MultipleChoiceQuestionScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            when (multipleChoiceScreenState) {
+            when (screenState) {
                 is MultipleChoiceScreenState.Success -> {
-                    (multipleChoiceScreenState as MultipleChoiceScreenState.Success).let { state ->
+                    (screenState as MultipleChoiceScreenState.Success).let { state ->
                         BreedImagePager(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -115,7 +115,7 @@ fun MultipleChoiceQuestionScreen(
                                 }
                             ) {
                                 if (!state.question.showAnswer) {
-                                    multipleChoiceQuestionViewModel.selectOption(option)
+                                    viewModel.selectOption(option)
                                     if (option.isCorrect) {
                                         hapticFeedback.performHapticFeedback(HapticFeedbackType.LongPress)
                                     }
@@ -130,7 +130,7 @@ fun MultipleChoiceQuestionScreen(
                             modifier = Modifier.padding(horizontal = 16.dp),
                             text = stringResource(id = R.string.next)
                         ) {
-                            multipleChoiceQuestionViewModel.loadQuestion()
+                            viewModel.loadQuestion()
                         }
                     }
                 }
@@ -146,7 +146,7 @@ fun MultipleChoiceQuestionScreen(
                         style = MaterialTheme.typography.titleMedium
                     )
                     DefaultButton(title = stringResource(id = R.string.home_error_retry)) {
-                        multipleChoiceQuestionViewModel.loadQuestion()
+                        viewModel.loadQuestion()
                     }
                 }
 

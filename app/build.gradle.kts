@@ -67,6 +67,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.android.compose)
+    implementation(libs.lottie.compose)
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit.rxjava)
     implementation(libs.retrofit)

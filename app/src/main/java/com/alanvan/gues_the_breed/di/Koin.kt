@@ -1,14 +1,12 @@
 package com.alanvan.gues_the_breed.di
 
-import com.alanvan.gues_the_breed.free_response.FreeResponseQuestionViewModel
 import com.alanvan.gues_the_breed.home.HomeViewModel
-import com.alanvan.gues_the_breed.multiple_choice.MultipleChoiceQuestionViewModel
+import com.alanvan.gues_the_breed.multiple_choice.GuessTheBreedViewModel
+import com.alanvan.gues_the_breed.usecases.GetDisplayNameFromBreedNameUseCase
 import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.data.BreedRepositoryImpl
 import com.alanvan.guess_the_breed.data.BreedService
 import com.alanvan.guess_the_breed.domain.usecases.GetAllBreedsUseCase
-import com.alanvan.gues_the_breed.usecases.GetDisplayNameFromBreedNameUseCase
-import com.alanvan.guess_the_breed.domain.usecases.GetFreeResponseQuestionUseCase
 import com.alanvan.guess_the_breed.domain.usecases.GetMultipleChoiceQuestionUseCase
 import com.alanvan.guess_the_breed.domain.usecases.LoadAllBreedsUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -40,13 +38,7 @@ val viewModelModule = module {
         )
     }
     viewModel {
-        FreeResponseQuestionViewModel(
-            GetFreeResponseQuestionUseCase(get()),
-            get(named(MAIN_THREAD))
-        )
-    }
-    viewModel {
-        MultipleChoiceQuestionViewModel(
+        GuessTheBreedViewModel(
             GetMultipleChoiceQuestionUseCase(get()),
             GetDisplayNameFromBreedNameUseCase(),
             get(named(MAIN_THREAD))

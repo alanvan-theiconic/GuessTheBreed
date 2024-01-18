@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -20,12 +21,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.alanvan.gues_the_breed.R
 import com.alanvan.gues_the_breed.common.DefaultButton
+import com.alanvan.gues_the_breed.common.DogAnimation
 import com.alanvan.gues_the_breed.common.GuessTheBreedAppBar
 import com.alanvan.gues_the_breed.common.OptionCard
 import com.alanvan.gues_the_breed.home.model.HomeScreenState
-import com.alanvan.gues_the_breed.navigation.FREE_RESPONSE
-import com.alanvan.gues_the_breed.navigation.MULTIPLE_CHOICE
-import com.alanvan.gues_the_breed.ui.theme.typography
+import com.alanvan.gues_the_breed.navigation.GUESS_THE_BREED
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -48,6 +48,9 @@ fun HomeScreen(navController: NavController) {
         ) {
             when (homeScreenState) {
                 is HomeScreenState.Success -> {
+                    DogAnimation(modifier = Modifier
+                        .height(500.dp)
+                        .padding(top = 24.dp))
                     Spacer(modifier = Modifier.weight(1f))
                     OptionCard(
                         modifier = Modifier
@@ -55,15 +58,7 @@ fun HomeScreen(navController: NavController) {
                             .padding(vertical = 8.dp, horizontal = 16.dp),
                         stringResource(id = R.string.multiple_choice_question)
                     ) {
-                        navController.navigate(MULTIPLE_CHOICE)
-                    }
-                    OptionCard(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp, horizontal = 16.dp),
-                        stringResource(id = R.string.free_response_question)
-                    ) {
-                        navController.navigate(FREE_RESPONSE)
+                        navController.navigate(GUESS_THE_BREED)
                     }
                 }
 

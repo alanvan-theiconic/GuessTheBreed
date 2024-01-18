@@ -17,6 +17,7 @@ rxjava-android = "3.0.2"
 lifecycle_version = "2.7.0"
 nav_version = "2.7.6"
 compose_runtime_livedata = "1.5.4"
+lottie = "6.3.0"
 jetbrainsKotlinJvm = "1.9.0"
 
 [libraries]
@@ -48,6 +49,7 @@ rxjava-android = { module = "io.reactivex.rxjava3:rxandroid", version.ref = "rxj
 viewModelCompose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle_version" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "nav_version" }
 compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose_runtime_livedata" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

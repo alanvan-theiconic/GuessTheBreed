@@ -12,7 +12,7 @@ import com.alanvan.guess_the_breed.domain.model.MultipleChoiceQuestionInput
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 
-class MultipleChoiceQuestionViewModel(
+class GuessTheBreedViewModel(
     private val getMultipleChoiceQuestionUseCase: ObservableUseCase<MultipleChoiceQuestionInput, MultipleChoiceQuestion>,
     private val getDisplayNameFromBreedNameUseCase: UseCase<String, String>,
     private val mainScheduler: Scheduler
@@ -22,9 +22,9 @@ class MultipleChoiceQuestionViewModel(
         private const val MAX_NUMBER_OF_IMAGES = 5
     }
 
-    private val _multipleChoiceScreenState: MutableLiveData<MultipleChoiceScreenState> =
+    private val _screenState: MutableLiveData<MultipleChoiceScreenState> =
         MutableLiveData()
-    val multipleChoiceScreenState: LiveData<MultipleChoiceScreenState> get() = _multipleChoiceScreenState
+    val screenState: LiveData<MultipleChoiceScreenState> get() = _screenState
 
     private var getMultipleChoiceQuestionDisposable: Disposable? = null
 
@@ -33,13 +33,13 @@ class MultipleChoiceQuestionViewModel(
     }
 
     fun loadQuestion() {
-        _multipleChoiceScreenState.value = MultipleChoiceScreenState.Loading
+        _screenState.value = MultipleChoiceScreenState.Loading
         getMultipleChoiceQuestionDisposable?.dispose()
         getMultipleChoiceQuestionDisposable = getMultipleChoiceQuestionUseCase
             .execute(MultipleChoiceQuestionInput(NUMBER_OF_OPTIONS, MAX_NUMBER_OF_IMAGES))
             .observeOn(mainScheduler)
             .subscribe({ question ->
-                _multipleChoiceScreenState.value = MultipleChoiceScreenState.Success(
+                _screenState.value = MultipleChoiceScreenState.Success(
                     question = UiMultipleChoiceQuestion(
                         breedImages = question.images,
                         options = question.options.map {
@@ -54,13 +54,13 @@ class MultipleChoiceQuestionViewModel(
                     )
                 )
             }, {
-                _multipleChoiceScreenState.value = MultipleChoiceScreenState.Error
+                _screenState.value = MultipleChoiceScreenState.Error
             })
     }
 
     fun selectOption(selectedOption: UiMultipleChoiceQuestion.UiOption) {
-        (_multipleChoiceScreenState.value as? MultipleChoiceScreenState.Success)?.let {
-            _multipleChoiceScreenState.value = MultipleChoiceScreenState.Success(
+        (_screenState.value as? MultipleChoiceScreenState.Success)?.let {
+            _screenState.value = MultipleChoiceScreenState.Success(
                 question = it.question.copy(
                     options = it.question.options.map { option ->
                         if (selectedOption == option) {
