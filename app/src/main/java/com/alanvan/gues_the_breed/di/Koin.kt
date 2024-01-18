@@ -1,7 +1,7 @@
 package com.alanvan.gues_the_breed.di
 
-import com.alanvan.gues_the_breed.MainViewModel
 import com.alanvan.gues_the_breed.free_response.FreeResponseQuestionViewModel
+import com.alanvan.gues_the_breed.home.HomeViewModel
 import com.alanvan.gues_the_breed.multiple_choice.MultipleChoiceQuestionViewModel
 import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.data.BreedRepositoryImpl
@@ -9,6 +9,7 @@ import com.alanvan.guess_the_breed.data.BreedService
 import com.alanvan.guess_the_breed.domain.usecases.GetAllBreedsUseCase
 import com.alanvan.guess_the_breed.domain.usecases.GetFreeResponseQuestionUseCase
 import com.alanvan.guess_the_breed.domain.usecases.GetMultipleChoiceQuestionUseCase
+import com.alanvan.guess_the_breed.domain.usecases.LoadAllBreedsUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -26,13 +27,14 @@ const val BASE_URL = "https://dog.ceo/api/"
 val appModule = module {
     single<Scheduler>(named(MAIN_THREAD)) { AndroidSchedulers.mainThread() }
     single<Scheduler>(named(IO)) { Schedulers.io() }
-    single<BreedRepository> { BreedRepositoryImpl(get(), get(named(IO))) }
+    single<BreedRepository> { BreedRepositoryImpl(get(), get(named(IO)), get(named(MAIN_THREAD))) }
 }
 
 val viewModelModule = module {
     viewModel {
-        MainViewModel(
+        HomeViewModel(
             GetAllBreedsUseCase(get()),
+            LoadAllBreedsUseCase(get()),
             get(named(MAIN_THREAD))
         )
     }

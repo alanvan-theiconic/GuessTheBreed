@@ -8,8 +8,14 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface BreedService {
-    @GET("breed/{name}/images")
-    fun getImagesForBreed(@Path("name") breedName: String): Single<BreedImagesResponse>
+    @GET("breed/{breedName}/images")
+    fun getImagesForBreed(@Path("breedName") breedName: String): Single<BreedImagesResponse>
+
+    @GET("breed/{breedName}/{subBreedName}/images")
+    fun getImagesForBreed(
+        @Path("breedName") breedName: String,
+        @Path("subBreedName") subBreedName: String
+    ): Single<BreedImagesResponse>
 
     @GET("breeds/image/random")
     fun getRandomBreedImage(): Single<BreedImageResponse>

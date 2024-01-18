@@ -1,13 +1,25 @@
 package com.alanvan.guess_the_breed.data
 
 import com.alanvan.guess_the_breed.data.model.BreedImage
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 class BreedRepositoryImpl(
     private val service: BreedService,
-    private val ioScheduler: Scheduler
+    private val ioScheduler: Scheduler,
+    private val mainScheduler: Scheduler
 ) : BreedRepository {
+
+    companion object {
+        const val BREED_NAME_MAX_SIZE = 2
+    }
+
+    private val allBreedsSubject: BehaviorSubject<List<String>> = BehaviorSubject.create()
+
+    private var loadAllBreedsDisposable: Disposable? = null
 
     override fun getRandomBreedImage(): Single<BreedImage> {
         return service.getRandomBreedImage().map {
@@ -20,21 +32,41 @@ class BreedRepositoryImpl(
 
     override fun getBreedImages(breedName: String?): Single<List<String>> {
         return breedName?.let {
-            service.getImagesForBreed(breedName).map {
-                it.imageUrls
-            }.subscribeOn(ioScheduler)
+            val breedInfo = breedName.split("-")
+            when (breedInfo.size) {
+                1 -> {
+                    service.getImagesForBreed(breedInfo.first())
+                }
+                BREED_NAME_MAX_SIZE -> {
+                    service.getImagesForBreed(breedInfo.first(), breedInfo[1])
+                }
+                else -> {
+                    Single.error(Exception("Breed name is invalid"))
+                }
+            }.map { it.imageUrls }.subscribeOn(ioScheduler)
         } ?: Single.error(Exception("Breed name cannot be empty"))
     }
 
-    override fun getAllBreeds(): Single<List<String>> {
-        return service.getAllBreeds().subscribeOn(ioScheduler).map { response ->
-            response.message.entries.fold(mutableListOf()) { acc, entry ->
+    override fun getAllBreeds(): Observable<List<String>> {
+        return allBreedsSubject.hide()
+    }
+
+    override fun loadAllBreeds() {
+        loadAllBreedsDisposable?.dispose()
+        loadAllBreedsDisposable = service.getAllBreeds().map { response ->
+            response.message.entries.fold(mutableListOf<String>()) { acc, entry ->
                 entry.value.forEach {
                     acc.add("${entry.key}-${it}")
                 }
                 acc
-            }
-        }
+            }.toList()
+        }.subscribeOn(ioScheduler)
+            .observeOn(mainScheduler)
+            .subscribe({
+                allBreedsSubject.onNext(it)
+            }, {
+                allBreedsSubject.onNext(emptyList())
+            })
     }
 
     private fun String.extractBreedNameFromUrl(): String? {
