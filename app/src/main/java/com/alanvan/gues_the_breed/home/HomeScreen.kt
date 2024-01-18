@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -74,7 +75,7 @@ fun HomeScreen(navController: NavController) {
                     Text(
                         modifier = Modifier.padding(bottom = 16.dp),
                         text = stringResource(id = R.string.home_error_title),
-                        style = typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium
                     )
                     DefaultButton(title = stringResource(id = R.string.home_error_retry)) {
                         homeViewModel.loadAllBreeds()

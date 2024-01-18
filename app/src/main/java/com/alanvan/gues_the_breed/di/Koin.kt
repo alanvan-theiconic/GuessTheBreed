@@ -7,6 +7,7 @@ import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.data.BreedRepositoryImpl
 import com.alanvan.guess_the_breed.data.BreedService
 import com.alanvan.guess_the_breed.domain.usecases.GetAllBreedsUseCase
+import com.alanvan.gues_the_breed.usecases.GetDisplayNameFromBreedNameUseCase
 import com.alanvan.guess_the_breed.domain.usecases.GetFreeResponseQuestionUseCase
 import com.alanvan.guess_the_breed.domain.usecases.GetMultipleChoiceQuestionUseCase
 import com.alanvan.guess_the_breed.domain.usecases.LoadAllBreedsUseCase
@@ -47,6 +48,7 @@ val viewModelModule = module {
     viewModel {
         MultipleChoiceQuestionViewModel(
             GetMultipleChoiceQuestionUseCase(get()),
+            GetDisplayNameFromBreedNameUseCase(),
             get(named(MAIN_THREAD))
         )
     }

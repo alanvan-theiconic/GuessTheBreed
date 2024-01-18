@@ -19,6 +19,7 @@ data class UiMultipleChoiceQuestion(
 ) {
     data class UiOption(
         val value: String,
+        val displayName: String,
         val isCorrect: Boolean,
         val isSelected: Boolean
     )

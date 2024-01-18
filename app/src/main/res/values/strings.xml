@@ -3,7 +3,9 @@
     <string name="home_title">Select a challenge</string>
     <string name="home_error_title">Something went wrong. Please try again</string>
     <string name="home_error_retry">Retry</string>
-    <string name="multiple_choice_question_title">Choose the breed</string>
+    <string name="multiple_choice_question_title">Guess the breed</string>
+    <string name="next">Next</string>
     <string name="multiple_choice_question">Select the correct breed based on the image!</string>
+    <string name="multiple_choice_question_reselected">"You have already answered this question!"</string>
     <string name="free_response_question">Want more challenge? Take a free response question!</string>
 </resources>

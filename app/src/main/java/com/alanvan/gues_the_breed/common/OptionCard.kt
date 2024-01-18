@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -15,16 +16,21 @@ import androidx.compose.ui.unit.dp
 import com.alanvan.gues_the_breed.ui.theme.typography
 
 @Composable
-fun OptionCard(modifier: Modifier, title: String, onClicked: () -> Unit) {
+fun OptionCard(
+    modifier: Modifier,
+    title: String,
+    colors: CardColors = CardDefaults.cardColors(
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
+        contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+    ),
+    onClicked: () -> Unit
+) {
     Card(
         modifier = modifier
             .clickable {
                 onClicked()
             },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        )
+        colors = colors
     ) {
         Box(
             contentAlignment = Alignment.Center,
@@ -32,7 +38,7 @@ fun OptionCard(modifier: Modifier, title: String, onClicked: () -> Unit) {
                 .padding(horizontal = 16.dp)
                 .defaultMinSize(minHeight = 90.dp)
         ) {
-            Text(text = title, style = typography.titleMedium)
+            Text(text = title, style = MaterialTheme.typography.titleMedium)
         }
     }
 }
