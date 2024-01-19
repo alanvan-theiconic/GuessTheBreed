@@ -1,4 +1,6 @@
 # Guess The Breed App
+<img src=https://github.com/alanvan-theiconic/GuessTheBreed/assets/101151538/33c0f859-31f4-475d-860f-b01f1b51f80d height=500/>
+<img src=https://github.com/alanvan-theiconic/GuessTheBreed/assets/101151538/04c95ac1-a365-478a-b656-661a0468fd8e height=500/>
 
 ## <a name="contents"></a>Contents
 
