@@ -7,7 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.alanvan.gues_the_breed.common.slideIn
 import com.alanvan.gues_the_breed.common.slideOut
 import com.alanvan.gues_the_breed.home.HomeScreen
-import com.alanvan.gues_the_breed.multiple_choice.GuessTheBreedScreen
+import com.alanvan.gues_the_breed.question.GuessTheBreedScreen
 
 @Composable
 fun AppNavigation() {

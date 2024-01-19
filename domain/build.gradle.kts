@@ -12,4 +12,8 @@ dependencies {
     implementation(project(":data"))
 
     implementation(libs.rxjava)
+
+    testImplementation(libs.mockk)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
 }

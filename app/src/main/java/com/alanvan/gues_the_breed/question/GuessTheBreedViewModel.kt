@@ -1,10 +1,10 @@
-package com.alanvan.gues_the_breed.multiple_choice
+package com.alanvan.gues_the_breed.question
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.alanvan.gues_the_breed.multiple_choice.model.MultipleChoiceScreenState
-import com.alanvan.gues_the_breed.multiple_choice.model.UiMultipleChoiceQuestion
+import com.alanvan.gues_the_breed.question.model.MultipleChoiceScreenState
+import com.alanvan.gues_the_breed.question.model.UiMultipleChoiceQuestion
 import com.alanvan.guess_the_breed.domain.common.ObservableUseCase
 import com.alanvan.guess_the_breed.domain.common.UseCase
 import com.alanvan.guess_the_breed.domain.model.MultipleChoiceQuestion

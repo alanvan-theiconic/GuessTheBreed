@@ -1,5 +1,6 @@
 package com.alanvan.gues_the_breed.home
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,9 +18,11 @@ class HomeViewModel(
     private val _homeScreenState: MutableLiveData<HomeScreenState> = MutableLiveData()
     val homeScreenState: LiveData<HomeScreenState> get() = _homeScreenState
 
-    private val disposables = CompositeDisposable()
+    @VisibleForTesting
+    val disposables = CompositeDisposable()
 
     init {
+        loadAllBreeds()
         disposables.add(
             getAllBreedsUseCase.execute(Unit)
                 .observeOn(mainScheduler)
@@ -33,7 +36,6 @@ class HomeViewModel(
                     _homeScreenState.value = HomeScreenState.Error
                 })
         )
-        loadAllBreeds()
     }
 
     fun loadAllBreeds() {

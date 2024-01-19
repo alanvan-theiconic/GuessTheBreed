@@ -2,7 +2,9 @@ package com.alanvan.gues_the_breed.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
@@ -12,17 +14,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.alanvan.gues_the_breed.ui.theme.typography
 
 @Composable
 fun OptionCard(
     modifier: Modifier,
     title: String,
+    textAlign: TextAlign = TextAlign.Start,
     colors: CardColors = CardDefaults.cardColors(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer
     ),
+    contentPadding: PaddingValues = PaddingValues(16.dp),
     onClicked: () -> Unit
 ) {
     Card(
@@ -34,11 +38,14 @@ fun OptionCard(
     ) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .defaultMinSize(minHeight = 90.dp)
+            modifier = Modifier.padding(contentPadding)
         ) {
-            Text(text = title, style = MaterialTheme.typography.titleMedium)
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = title,
+                textAlign = textAlign,
+                style = MaterialTheme.typography.titleMedium
+            )
         }
     }
 }

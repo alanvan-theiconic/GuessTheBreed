@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,7 +24,7 @@ import com.alanvan.gues_the_breed.R
 @Composable
 fun BreedImagePager(modifier: Modifier, images: List<String>) {
     val pagerState = rememberPagerState { images.size }
-    Box(modifier = modifier) {
+    Box(modifier = modifier.wrapContentHeight()) {
         HorizontalPager(
             state = pagerState
         ) {
@@ -31,7 +32,7 @@ fun BreedImagePager(modifier: Modifier, images: List<String>) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(0.8f)
-                    .clip(RoundedCornerShape(16.dp)),
+                    .clip(RoundedCornerShape(12.dp)),
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(images[it])
                     .crossfade(true)

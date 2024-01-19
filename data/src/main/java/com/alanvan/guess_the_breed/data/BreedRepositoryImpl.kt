@@ -1,6 +1,5 @@
 package com.alanvan.guess_the_breed.data
 
-import com.alanvan.guess_the_breed.data.model.BreedImage
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
@@ -21,15 +20,6 @@ class BreedRepositoryImpl(
 
     private var loadAllBreedsDisposable: Disposable? = null
 
-    override fun getRandomBreedImage(): Single<BreedImage> {
-        return service.getRandomBreedImage().map {
-            BreedImage(
-                breedName = it.imageUrl?.extractBreedNameFromUrl(),
-                imageUrl = it.imageUrl
-            )
-        }.subscribeOn(ioScheduler)
-    }
-
     override fun getBreedImages(breedName: String?): Single<List<String>> {
         return breedName?.let {
             val breedInfo = breedName.split("-")
@@ -37,14 +27,16 @@ class BreedRepositoryImpl(
                 1 -> {
                     service.getImagesForBreed(breedInfo.first())
                 }
+
                 BREED_NAME_MAX_SIZE -> {
                     service.getImagesForBreed(breedInfo.first(), breedInfo[1])
                 }
+
                 else -> {
                     Single.error(Exception("Breed name is invalid"))
                 }
             }.map { it.imageUrls }.subscribeOn(ioScheduler)
-        } ?: Single.error(Exception("Breed name cannot be empty"))
+        } ?: Single.error(Exception("Breed name cannot be null"))
     }
 
     override fun getAllBreeds(): Observable<List<String>> {
@@ -55,8 +47,12 @@ class BreedRepositoryImpl(
         loadAllBreedsDisposable?.dispose()
         loadAllBreedsDisposable = service.getAllBreeds().map { response ->
             response.message.entries.fold(mutableListOf<String>()) { acc, entry ->
-                entry.value.forEach {
-                    acc.add("${entry.key}-${it}")
+                if (entry.value.isNotEmpty()) {
+                    entry.value.forEach {
+                        acc.add("${entry.key}-${it}")
+                    }
+                } else {
+                    acc.add(entry.key)
                 }
                 acc
             }.toList()
@@ -67,11 +63,5 @@ class BreedRepositoryImpl(
             }, {
                 allBreedsSubject.onNext(emptyList())
             })
-    }
-
-    private fun String.extractBreedNameFromUrl(): String? {
-        val pattern = Regex("/breeds/([^/]+)/")
-        val matchResult = pattern.find(this)
-        return matchResult?.groups?.get(1)?.value
     }
 }

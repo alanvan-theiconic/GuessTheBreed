@@ -1,7 +1,7 @@
 package com.alanvan.gues_the_breed.di
 
 import com.alanvan.gues_the_breed.home.HomeViewModel
-import com.alanvan.gues_the_breed.multiple_choice.GuessTheBreedViewModel
+import com.alanvan.gues_the_breed.question.GuessTheBreedViewModel
 import com.alanvan.gues_the_breed.usecases.GetDisplayNameFromBreedNameUseCase
 import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.data.BreedRepositoryImpl

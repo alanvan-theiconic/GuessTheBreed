@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,17 +22,11 @@ fun QuestionNavigation(
     onClicked: () -> Unit
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .requiredHeight(64.dp)
+        modifier = modifier.fillMaxWidth().wrapContentHeight()
     ) {
         Spacer(modifier = Modifier.weight(1f))
         Button(
             modifier = Modifier
-                .padding(
-                    top = 8.dp,
-                    bottom = 16.dp
-                )
                 .widthIn(120.dp),
             onClick = onClicked
         ) {

@@ -1,4 +1,4 @@
-package com.alanvan.gues_the_breed.multiple_choice
+package com.alanvan.gues_the_breed.question
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,7 +35,7 @@ import com.alanvan.gues_the_breed.common.DefaultButton
 import com.alanvan.gues_the_breed.common.GuessTheBreedAppBar
 import com.alanvan.gues_the_breed.common.OptionCard
 import com.alanvan.gues_the_breed.common.QuestionNavigation
-import com.alanvan.gues_the_breed.multiple_choice.model.MultipleChoiceScreenState
+import com.alanvan.gues_the_breed.question.model.MultipleChoiceScreenState
 import com.alanvan.gues_the_breed.ui.theme.successGreen
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -79,17 +79,18 @@ fun GuessTheBreedScreen(
                         BreedImagePager(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 16.dp, vertical = 8.dp),
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
                             state.question.breedImages
                         )
+
                         val hapticFeedback = LocalHapticFeedback.current
                         state.question.options.forEach { option ->
                             OptionCard(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .wrapContentHeight()
-                                    .padding(start = 16.dp, end = 16.dp, bottom = 8.dp)
-                                    .weight(1f),
+                                    .padding(start = 16.dp, end = 16.dp, bottom = 12.dp),
                                 title = option.displayName,
                                 colors = when {
                                     state.question.showAnswer && option.isCorrect -> {
@@ -127,7 +128,8 @@ fun GuessTheBreedScreen(
                             }
                         }
                         QuestionNavigation(
-                            modifier = Modifier.padding(horizontal = 16.dp),
+                            modifier = Modifier
+                                .padding(horizontal = 16.dp),
                             text = stringResource(id = R.string.next)
                         ) {
                             viewModel.loadQuestion()

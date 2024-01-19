@@ -1,4 +1,4 @@
-package com.alanvan.gues_the_breed.multiple_choice.model
+package com.alanvan.gues_the_breed.question.model
 
 import androidx.compose.runtime.Immutable
 

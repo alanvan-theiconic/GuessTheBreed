@@ -13,4 +13,6 @@ dependencies {
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit.rxjava)
     implementation(libs.rxjava)
+    testImplementation(libs.mockk)
+    testImplementation(libs.junit)
 }
