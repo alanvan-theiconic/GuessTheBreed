@@ -9,8 +9,6 @@ java {
 }
 
 dependencies {
-    implementation(project(":data"))
-
     implementation(libs.rxjava)
 
     testImplementation(libs.mockk)

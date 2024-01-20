@@ -2,6 +2,7 @@ package com.alanvan.guess_the_breed.data
 
 import com.alanvan.guess_the_breed.data.model.BreedImagesResponse
 import com.alanvan.guess_the_breed.data.model.BreedsResponse
+import com.alanvan.guess_the_breed.domain.repository.BreedRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

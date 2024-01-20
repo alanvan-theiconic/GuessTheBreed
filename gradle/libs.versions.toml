@@ -20,6 +20,8 @@ lottie = "6.3.0"
 mockk = "1.13.5"
 arch-testing = "2.1.0"
 jetbrainsKotlinJvm = "1.9.0"
+appcompat = "1.6.1"
+material = "1.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,8 +56,11 @@ compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
 arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "arch-testing" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrainsKotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }

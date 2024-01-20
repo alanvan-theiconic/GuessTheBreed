@@ -1,5 +1,6 @@
 package com.alanvan.guess_the_breed.data
 
+import com.alanvan.guess_the_breed.domain.repository.BreedRepository
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
