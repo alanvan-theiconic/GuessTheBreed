@@ -35,7 +35,7 @@ import com.alanvan.gues_the_breed.common.DefaultButton
 import com.alanvan.gues_the_breed.common.GuessTheBreedAppBar
 import com.alanvan.gues_the_breed.common.OptionCard
 import com.alanvan.gues_the_breed.common.QuestionNavigation
-import com.alanvan.gues_the_breed.question.model.MultipleChoiceScreenState
+import com.alanvan.gues_the_breed.question.model.GuessTheBreedScreenState
 import com.alanvan.gues_the_breed.ui.theme.successGreen
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -74,8 +74,8 @@ fun GuessTheBreedScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             when (screenState) {
-                is MultipleChoiceScreenState.Success -> {
-                    (screenState as MultipleChoiceScreenState.Success).let { state ->
+                is GuessTheBreedScreenState.Success -> {
+                    (screenState as GuessTheBreedScreenState.Success).let { state ->
                         BreedImagePager(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -137,11 +137,11 @@ fun GuessTheBreedScreen(
                     }
                 }
 
-                is MultipleChoiceScreenState.Loading -> {
+                is GuessTheBreedScreenState.Loading -> {
                     CircularProgressIndicator()
                 }
 
-                is MultipleChoiceScreenState.Error -> {
+                is GuessTheBreedScreenState.Error -> {
                     Text(
                         modifier = Modifier.padding(bottom = 16.dp),
                         text = stringResource(id = R.string.home_error_title),

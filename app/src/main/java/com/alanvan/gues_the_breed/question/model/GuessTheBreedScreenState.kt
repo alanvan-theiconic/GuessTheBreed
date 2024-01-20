@@ -3,12 +3,12 @@ package com.alanvan.gues_the_breed.question.model
 import androidx.compose.runtime.Immutable
 
 @Immutable
-sealed class MultipleChoiceScreenState {
-    data object Error : MultipleChoiceScreenState()
-    data object Loading : MultipleChoiceScreenState()
+sealed class GuessTheBreedScreenState {
+    data object Error : GuessTheBreedScreenState()
+    data object Loading : GuessTheBreedScreenState()
     data class Success(
         val question: UiMultipleChoiceQuestion
-    ) : MultipleChoiceScreenState()
+    ) : GuessTheBreedScreenState()
 }
 
 @Immutable

@@ -1,7 +1,7 @@
 package com.alanvan.gues_the_breed.question
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.alanvan.gues_the_breed.question.model.MultipleChoiceScreenState
+import com.alanvan.gues_the_breed.question.model.GuessTheBreedScreenState
 import com.alanvan.guess_the_breed.domain.common.ObservableUseCase
 import com.alanvan.guess_the_breed.domain.common.UseCase
 import com.alanvan.guess_the_breed.domain.model.MultipleChoiceQuestion
@@ -57,7 +57,7 @@ class GuessTheBreedViewModelTest {
             getMultipleChoiceQuestionUseCase.execute(any())
             getDisplayNameFromBreedNameUseCase.execute(any())
         }
-        assertTrue(viewModel.screenState.value is MultipleChoiceScreenState.Success)
+        assertTrue(viewModel.screenState.value is GuessTheBreedScreenState.Success)
     }
 
     @Test
@@ -76,7 +76,7 @@ class GuessTheBreedViewModelTest {
         verify(exactly = 0) {
             getDisplayNameFromBreedNameUseCase.execute(any())
         }
-        assertTrue(viewModel.screenState.value is MultipleChoiceScreenState.Error)
+        assertTrue(viewModel.screenState.value is GuessTheBreedScreenState.Error)
     }
 
     @Test
@@ -87,11 +87,11 @@ class GuessTheBreedViewModelTest {
             mainScheduler
         )
         val option =
-            (viewModel.screenState.value as MultipleChoiceScreenState.Success).question.options.first()
+            (viewModel.screenState.value as GuessTheBreedScreenState.Success).question.options.first()
         assertFalse(option.isSelected)
         viewModel.selectOption(option)
         val updatedOption =
-            (viewModel.screenState.value as MultipleChoiceScreenState.Success).question.options.first()
+            (viewModel.screenState.value as GuessTheBreedScreenState.Success).question.options.first()
         assertTrue(updatedOption.isSelected)
     }
 }
