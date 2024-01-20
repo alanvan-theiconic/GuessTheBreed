@@ -1,6 +1,6 @@
 package com.alanvan.guess_the_breed.domain.usecases
 
-import com.alanvan.guess_the_breed.data.BreedRepository
+import com.alanvan.guess_the_breed.domain.repository.BreedRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

@@ -1,16 +1,14 @@
 package com.alanvan.guess_the_breed.domain.usecases
 
-import com.alanvan.guess_the_breed.data.BreedRepository
 import com.alanvan.guess_the_breed.domain.model.MultipleChoiceQuestionInput
+import com.alanvan.guess_the_breed.domain.repository.BreedRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
-import org.junit.Assert.assertFalse
 import org.junit.Before
 import org.junit.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 class GetMultipleChoiceQuestionUseCaseTest {
     private lateinit var useCase: GetMultipleChoiceQuestionUseCase
@@ -55,7 +53,7 @@ class GetMultipleChoiceQuestionUseCaseTest {
         testObserver.assertComplete()
         testObserver.assertNoErrors()
         val result = testObserver.values().first()
-        with (result) {
+        with(result) {
             assertEquals(2, this.images.size)
             assertEquals(3, this.options.size)
             assertEquals(1, this.options.filter { it.isCorrect }.size)

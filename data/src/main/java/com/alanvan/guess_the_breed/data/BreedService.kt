@@ -1,6 +1,5 @@
 package com.alanvan.guess_the_breed.data
 
-import com.alanvan.guess_the_breed.data.model.BreedImageResponse
 import com.alanvan.guess_the_breed.data.model.BreedImagesResponse
 import com.alanvan.guess_the_breed.data.model.BreedsResponse
 import io.reactivex.rxjava3.core.Single
@@ -16,9 +15,6 @@ interface BreedService {
         @Path("breedName") breedName: String,
         @Path("subBreedName") subBreedName: String
     ): Single<BreedImagesResponse>
-
-    @GET("breeds/image/random")
-    fun getRandomBreedImage(): Single<BreedImageResponse>
 
     @GET("breeds/list/all")
     fun getAllBreeds(): Single<BreedsResponse>
